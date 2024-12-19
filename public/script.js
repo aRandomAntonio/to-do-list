@@ -1,45 +1,46 @@
-var input = document.getElementById("inpute");
-var button = document.getElementById("butao");
-var boxes = [];
-var images = [];
-var texts = [];
-var parentArray = [];
-var ul;
-var remove;
-var rename;
-var count = 1;
+"use strict";
+let input = document.getElementById("inpute");
+let button = document.getElementById("butao");
+let boxes = [];
+let images = [];
+let texts = [];
+let parentArray = [];
+let ul;
+let remove;
+let rename;
+let count = 1;
 function add() {
     if (input.value) {
-        var div = document.createElement("div");
-        div.id = "parent".concat(count);
+        let div = document.createElement("div");
+        div.id = `parent${count}`;
         div.className = "parent";
         parentArray.push(div);
         div.innerHTML = count.toString();
-        var box_1 = document.createElement("input");
-        box_1.setAttribute("type", "checkbox");
-        box_1.id = "box".concat(count);
-        box_1.className = "box";
-        boxes.push(box_1);
-        div.appendChild(box_1);
-        box_1.addEventListener("click", function () {
-            verify(box_1);
+        let box = document.createElement("input");
+        box.setAttribute("type", "checkbox");
+        box.id = `box${count}`;
+        box.className = "box";
+        boxes.push(box);
+        div.appendChild(box);
+        box.addEventListener("click", () => {
+            verify(box);
         });
-        var text = document.createElement("div");
+        let text = document.createElement("div");
         text.innerHTML = input.value;
-        text.id = "text".concat(count);
+        text.id = `text${count}`;
         text.className = "text";
         div.appendChild(text);
         texts.push(text);
-        var img_1 = document.createElement("img");
-        img_1.src = "img/3dots.png";
-        img_1.id = "image".concat(count);
-        img_1.className = "img";
-        img_1.addEventListener("click", function (event) {
+        let img = document.createElement("img");
+        img.src = "public/img/3dots.png";
+        img.id = `image${count}`;
+        img.className = "img";
+        img.addEventListener("click", (event) => {
             event.stopPropagation();
-            open(img_1);
+            open(img);
         });
-        images.push(img_1);
-        div.appendChild(img_1);
+        images.push(img);
+        div.appendChild(img);
         document.body.appendChild(div);
         count++;
         input.value = "";
@@ -58,8 +59,8 @@ function verify(box) {
     }
 }
 function open(target) {
-    var parentElement = target.parentElement;
-    document.querySelectorAll("#ul").forEach(function (existingUl) { return existingUl.remove(); });
+    let parentElement = target.parentElement;
+    document.querySelectorAll("#ul").forEach(existingUl => existingUl.remove());
     ul = document.createElement("ul");
     remove = document.createElement("li");
     rename = document.createElement("li");
@@ -74,37 +75,37 @@ function open(target) {
     remove.addEventListener("click", function (event) {
         var _a;
         event.stopPropagation();
-        var target = event.target;
-        var parentElement = (_a = target.parentElement) === null || _a === void 0 ? void 0 : _a.parentElement;
+        let target = event.target;
+        let parentElement = (_a = target.parentElement) === null || _a === void 0 ? void 0 : _a.parentElement;
         if (parentElement) {
             parentElement.remove();
-            parentArray = parentArray.filter(function (item) { return item !== parentElement; });
-            var index = texts.findIndex(function (text) { return text.parentElement === parentElement; });
+            parentArray = parentArray.filter(item => item !== parentElement);
+            let index = texts.findIndex(text => text.parentElement === parentElement);
             boxes.splice(index, 1);
             texts.splice(index, 1);
             images.splice(index, 1);
             count = 1;
-            parentArray.forEach(function (parent, i) {
+            parentArray.forEach((parent, i) => {
                 parent.innerHTML = "";
                 parent.innerHTML = count.toString();
-                var newBox = document.createElement("input");
+                let newBox = document.createElement("input");
                 newBox.type = "checkbox";
-                newBox.id = "box".concat(count);
+                newBox.id = `box${count}`;
                 newBox.className = "box";
                 boxes[i] = newBox;
-                newBox.addEventListener("click", function () {
+                newBox.addEventListener("click", () => {
                     verify(newBox);
                 });
-                var newText = document.createElement("div");
-                newText.id = "text".concat(count);
+                let newText = document.createElement("div");
+                newText.id = `text${count}`;
                 newText.className = "text";
                 newText.innerHTML = texts[i].innerHTML;
                 texts[i] = newText;
-                var newImg = document.createElement("img");
-                newImg.src = "img/3dots.png";
-                newImg.id = "image".concat(count);
+                let newImg = document.createElement("img");
+                newImg.src = "/public/img/3dots.img";
+                newImg.id = `image${count}`;
                 newImg.className = "img";
-                newImg.addEventListener("click", function (event) {
+                newImg.addEventListener("click", (event) => {
                     event.stopPropagation();
                     open(newImg);
                 });
@@ -122,29 +123,29 @@ function open(target) {
     });
 }
 function changeName(target) {
-    var newName = document.createElement("input");
+    let newName = document.createElement("input");
     newName.setAttribute("type", "text");
-    var parent = target.parentElement;
+    let parent = target.parentElement;
     console.log(target);
     console.log(parent);
-    var text = parent === null || parent === void 0 ? void 0 : parent.querySelector('.text');
+    let text = parent === null || parent === void 0 ? void 0 : parent.querySelector('.text');
     if (text) {
-        newName.style.width = "100px";
+        newName.style.width = `100px`;
         text.replaceWith(newName);
         newName.focus();
         ul.remove();
         remove.remove();
         rename.remove();
-        document.addEventListener("click", function () {
+        document.addEventListener("click", () => {
             parent === null || parent === void 0 ? void 0 : parent.replaceChild(text, newName);
         });
-        newName.addEventListener("keydown", function (event) {
+        newName.addEventListener("keydown", (event) => {
             if (event.key === "Enter") {
                 if (newName.value.trim()) {
-                    var newText = document.createElement("div");
+                    let newText = document.createElement("div");
                     newText.innerHTML = newName.value;
                     newText.className = "text";
-                    var textIndex = texts.findIndex(function (el) { return el === text; });
+                    let textIndex = texts.findIndex(el => el === text);
                     if (textIndex !== -1) {
                         texts[textIndex] = newText;
                         parent === null || parent === void 0 ? void 0 : parent.replaceChild(newText, newName);
@@ -162,10 +163,10 @@ input.addEventListener("keydown", function (event) {
         add();
     }
 });
-button.addEventListener("click", function () {
+button.addEventListener("click", () => {
     add();
 });
-document.addEventListener("click", function (event) {
+document.addEventListener("click", (event) => {
     if (ul && !ul.contains(event.target)) {
         ul.remove();
         remove.remove();
