@@ -32,7 +32,7 @@ function add() {
         div.appendChild(text);
         texts.push(text);
         let img = document.createElement("img");
-        img.src = "/public/img/3dots.png";
+        img.src = "public/img/3dots.png";
         img.id = `image${count}`;
         img.className = "img";
         img.addEventListener("click", (event) => {
@@ -102,7 +102,7 @@ function open(target) {
                 newText.innerHTML = texts[i].innerHTML;
                 texts[i] = newText;
                 let newImg = document.createElement("img");
-                newImg.src = "/public/img/3dots.png";
+                newImg.src = "public/img/3dots.png";
                 newImg.id = `image${count}`;
                 newImg.className = "img";
                 newImg.addEventListener("click", (event) => {
