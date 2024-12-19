@@ -122,7 +122,7 @@ function open(target: HTMLElement): void {
                 texts[i] = newText;
     
                 let newImg = document.createElement("img");
-                newImg.src = "public/img/3dots.png";
+                newImg.src = "/public/img/3dots.png";
                 newImg.id = `image${count}`;
                 newImg.className = "img";
                 newImg.addEventListener("click", (event) => {
@@ -130,14 +130,16 @@ function open(target: HTMLElement): void {
                     open(newImg);
                 });
                 images[i] = newImg;
-
+    
                 parent.appendChild(newBox);
                 parent.appendChild(newText);
                 parent.appendChild(newImg);
+    
                 count++;
             });
         }
     });
+    
     
 
     rename.addEventListener("click", function (event: any): void {

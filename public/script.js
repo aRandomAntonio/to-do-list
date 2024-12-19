@@ -102,7 +102,7 @@ function open(target) {
                 newText.innerHTML = texts[i].innerHTML;
                 texts[i] = newText;
                 let newImg = document.createElement("img");
-                newImg.src = "public/img/3dots.png";
+                newImg.src = "/public/img/3dots.png";
                 newImg.id = `image${count}`;
                 newImg.className = "img";
                 newImg.addEventListener("click", (event) => {
