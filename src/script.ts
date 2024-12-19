@@ -41,7 +41,7 @@ function add(): void {
         texts.push(text);
 
         let img = document.createElement("img") as HTMLImageElement;
-        img.src = "public/img/3dots.png";
+        img.src = "/public/img/3dots.png";
         img.id = `image${count}`;
         img.className = "img";
         img.addEventListener("click", (event) => {
@@ -93,14 +93,14 @@ function open(target: HTMLElement): void {
         let parentElement = target.parentElement?.parentElement;
         if (parentElement) {
             parentElement.remove();
-
+    
             parentArray = parentArray.filter(item => item !== parentElement);
             
             let index = texts.findIndex(text => text.parentElement === parentElement);
             boxes.splice(index, 1);
             texts.splice(index, 1);
             images.splice(index, 1);
-
+    
             count = 1;
             parentArray.forEach((parent, i) => {
                 parent.innerHTML = "";
@@ -114,16 +114,15 @@ function open(target: HTMLElement): void {
                 newBox.addEventListener("click", (): void => {
                     verify(newBox);
                 });
-
-
+    
                 let newText = document.createElement("div");
                 newText.id = `text${count}`;
                 newText.className = "text";
                 newText.innerHTML = texts[i].innerHTML;
                 texts[i] = newText;
-
+    
                 let newImg = document.createElement("img");
-                newImg.src = "public/img/3dots.img";
+                newImg.src = "public/img/3dots.png";
                 newImg.id = `image${count}`;
                 newImg.className = "img";
                 newImg.addEventListener("click", (event) => {
@@ -135,11 +134,11 @@ function open(target: HTMLElement): void {
                 parent.appendChild(newBox);
                 parent.appendChild(newText);
                 parent.appendChild(newImg);
-
                 count++;
             });
         }
     });
+    
 
     rename.addEventListener("click", function (event: any): void {
         event.stopPropagation();
